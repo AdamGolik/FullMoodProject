@@ -22,7 +22,7 @@ public class Mood {
     @Column(name = "mood") // nastrój
     private String mood;
 
-    @Column(name = "description") // descriptcja
+    @Column(name = "description") // deskrypcja
     private String description;
 
     @Column(name = "alcohol") // Zmieniono nazwę i kolumnę
