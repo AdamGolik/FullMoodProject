@@ -13,11 +13,11 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**") // Dopasowanie dla wszystkich endpointów
-                        .allowedOrigins("http://localhost:5174") // Dozwolone pochodzenie (origin)
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Dozwolone metody
+                registry.addMapping("/**") // Dopasowanie do wszystkich endpointów
+                        .allowedOrigins("http://localhost:5173") // Dopuszczenie Reacta (origin)
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Dopuszczalne metody
                         .allowedHeaders("*") // Zezwolenie na wszystkie nagłówki
-                        .allowCredentials(true); // Obsługa ciasteczek/autoryzacji
+                        .allowCredentials(true); // Obsługa uwierzytelniania i ciasteczek
             }
         };
     }

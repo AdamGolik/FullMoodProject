@@ -30,14 +30,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Wyłącz CSRF (opcjonalne dla API REST)
-                .cors(Customizer.withDefaults()) // Włącz CORS (domyślną konfiguracją)
+                .csrf(csrf -> csrf.disable()) // CSRF wyłączone dla API REST
+                .cors(Customizer.withDefaults()) // Obsługa CORS oparta na konfiguracji WebConfig
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Zezwól na preflight (dla CORS)
-                .requestMatchers("/register").permitAll() // Publiczny dostęp do endpointu rejestracji
-                .anyRequest().authenticated() // Reszta wymaga autoryzacji//
+                        // Pozwolenie na zapytania `OPTIONS` dla wszystkich endpointów (w tym z nagłówkiem Authorization)
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        // Dostęp tylko dla uwierzytelnionych użytkowników do innych zapytań
+                        .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults()); // Użyj HTTP Basic Authentication (opcjonalne)
+                .httpBasic(Customizer.withDefaults()); // Uwierzytelnianie HTTP Basic dla użytkowników
 
         return http.build();
     }
